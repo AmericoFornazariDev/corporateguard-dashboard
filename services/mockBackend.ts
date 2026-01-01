@@ -182,7 +182,7 @@ export const registerCompany = async (data: RegistrationData): Promise<SessionDa
     id: userId,
     name: data.name,
     email: data.email,
-    role: UserRole.ADMIN,
+    role: UserRole.MEMBER,
     company_id: companyId
   };
 
