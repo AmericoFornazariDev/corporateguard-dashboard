@@ -1,0 +1,5 @@
+{
+  "name": "CorporateGuard Dashboard",
+  "description": "A compliance-first institutional dashboard with state-machine routing and mandatory terms of acceptance validation.",
+  "requestFramePermissions": []
+}
