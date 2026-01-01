@@ -4,9 +4,11 @@ import { Company, SessionData, User, UserRole, ValidationStatus, RegistrationDat
 // CONFIGURAÇÃO CENTRAL (ENV VARS)
 // ============================================================================
 
-// Tenta ler do arquivo .env (REACT_APP_USE_REAL_API=true)
+// Tenta ler do arquivo .env (VITE_USE_REAL_API=true)
 // Se não existir, usa 'false' como padrão (Modo Mock / LocalStorage)
-const ENV_USE_REAL_API = process.env.REACT_APP_USE_REAL_API === 'true';
+const VITE_ENV = (import.meta as ImportMeta).env || {};
+const ENV_USE_REAL_API =
+  (VITE_ENV.VITE_USE_REAL_API ?? process.env.REACT_APP_USE_REAL_API) === 'true';
 
 // Se quiser forçar manualmente no código, altere esta linha para true/false ignorando o .env
 const FORCE_MANUAL_OVERRIDE: boolean | null = null; 
@@ -17,7 +19,10 @@ const API_CONFIG = {
   // Lê a URL do .env ou usa o localhost padrão
   // NOTA: O Frontend só precisa saber a URL da API.
   // As credenciais do Banco de Dados (DB_HOST, DB_PASS) ficam APENAS no servidor Backend.
-  BASE_URL: process.env.REACT_APP_API_URL || 'http://localhost:3000/api', 
+  BASE_URL:
+    VITE_ENV.VITE_API_URL ||
+    process.env.REACT_APP_API_URL ||
+    'http://localhost:3001/api',
   TIMEOUT: 5000
 };
 
