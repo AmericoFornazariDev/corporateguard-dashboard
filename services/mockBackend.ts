@@ -19,14 +19,21 @@ const API_CONFIG = {
   // Lê a URL do .env ou usa o localhost padrão
   // NOTA: O Frontend só precisa saber a URL da API.
   // As credenciais do Banco de Dados (DB_HOST, DB_PASS) ficam APENAS no servidor Backend.
+ codex/review-project-and-provide-feedback-8g3oj9
+  // Variáveis suportadas: VITE_API_URL (Vite) e REACT_APP_API_URL (legado).
+
  codex/review-project-and-provide-feedback-g8yxq9
+ main
   BASE_URL:
     VITE_ENV.VITE_API_URL ||
     process.env.REACT_APP_API_URL ||
     'http://localhost:3001/api',
+codex/review-project-and-provide-feedback-8g3oj9
+
 
   BASE_URL: process.env.REACT_APP_API_URL || 'http://localhost:3001/api',
 main
+ main
   TIMEOUT: 5000
 };
 
