@@ -17,7 +17,7 @@ const API_CONFIG = {
   // Lê a URL do .env ou usa o localhost padrão
   // NOTA: O Frontend só precisa saber a URL da API.
   // As credenciais do Banco de Dados (DB_HOST, DB_PASS) ficam APENAS no servidor Backend.
-  BASE_URL: process.env.REACT_APP_API_URL || 'http://localhost:3000/api', 
+  BASE_URL: process.env.REACT_APP_API_URL || 'http://localhost:3001/api',
   TIMEOUT: 5000
 };
 
