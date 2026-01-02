@@ -115,6 +115,7 @@ export const Dashboard: React.FC<Props> = ({ user, company, terms, onTermsAccept
                     >
                         Voltar
                     </button>
+
                     {activeView === 'OPERATIONAL_HOME' && (
                         <div className="flex items-center gap-2">
                             <button

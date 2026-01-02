@@ -250,6 +250,8 @@ const CollectivePurchasesModule = ({ company, user, token }: CollectivePurchases
           <p className="text-sm text-gray-600">Compra: {finalDocument.purchase.product_name}</p>
           <ul className="mt-3 space-y-1 text-sm text-gray-600">
 
+
+
     <div>
       <h2>Compras Coletivas</h2>
       <p>Empresa: {company.nome_fantasia}</p>
@@ -356,6 +358,7 @@ const CollectivePurchasesModule = ({ company, user, token }: CollectivePurchases
           <p>Compra: {finalDocument.purchase.product_name}</p>
           <ul>
 
+
             {finalDocument.participants.map((participant, index) => (
               <li key={`${participant.nif}-${index}`}>
                 {participant.nome_fantasia} - {participant.quantity} - {participant.nif} -{' '}
@@ -366,7 +369,11 @@ const CollectivePurchasesModule = ({ company, user, token }: CollectivePurchases
 
         </div>
 
+
+        </div>
+
         </section>
+
 
       ) : null}
     </div>

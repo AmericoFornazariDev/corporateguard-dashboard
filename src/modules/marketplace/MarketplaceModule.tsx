@@ -114,6 +114,8 @@ const MarketplaceModule = ({ company, user, token }: MarketplaceModuleProps) => 
                     Quantidade
                     <input
                       className="mt-1 w-full rounded-lg border border-gray-200 px-3 py-2 text-sm"
+
+
     <div>
       <h2>Marketplace de Compras Coletivas</h2>
       <p>Empresa: {company.nome_fantasia}</p>
@@ -140,6 +142,7 @@ const MarketplaceModule = ({ company, user, token }: MarketplaceModuleProps) => 
                     Quantidade
                     <input
 
+
                       type="number"
                       value={quantity[purchase.id] || ''}
                       onChange={(event) =>
@@ -148,16 +151,22 @@ const MarketplaceModule = ({ company, user, token }: MarketplaceModuleProps) => 
                     />
                   </label>
 
+
+
+
                   <label className="block text-sm text-gray-700">
                     Assinatura - ID
                     <input
                       className="mt-1 w-full rounded-lg border border-gray-200 px-3 py-2 text-sm"
+
+
 
                 </div>
                 <div>
                   <label>
                     Assinatura - ID
                     <input
+
 
                       value={signatureId[purchase.id] || ''}
                       onChange={(event) =>
@@ -171,11 +180,14 @@ const MarketplaceModule = ({ company, user, token }: MarketplaceModuleProps) => 
                     <input
                       className="mt-1 w-full rounded-lg border border-gray-200 px-3 py-2 text-sm"
 
+
+
                 </div>
                 <div>
                   <label>
                     Assinatura - Nome
                     <input
+
 
                       value={signatureName[purchase.id] || ''}
                       onChange={(event) =>
@@ -184,10 +196,14 @@ const MarketplaceModule = ({ company, user, token }: MarketplaceModuleProps) => 
                     />
                   </label>
 
+
+
                   <label className="block text-sm text-gray-700">
                     Assinatura - Contacto
                     <input
                       className="mt-1 w-full rounded-lg border border-gray-200 px-3 py-2 text-sm"
+
+
 
                 </div>
                 <div>
@@ -195,12 +211,16 @@ const MarketplaceModule = ({ company, user, token }: MarketplaceModuleProps) => 
                     Assinatura - Contacto
                     <input
 
+
                       value={signatureContact[purchase.id] || ''}
                       onChange={(event) =>
                         setSignatureContact((prev) => ({ ...prev, [purchase.id]: event.target.value }))
                       }
                     />
                   </label>
+
+
+
 
                   <div className="flex flex-wrap gap-3 md:col-span-2">
                     <button
@@ -227,6 +247,8 @@ const MarketplaceModule = ({ company, user, token }: MarketplaceModuleProps) => 
         </div>
       </div>
 
+
+
                 </div>
                 <button type="button" onClick={() => handleJoin(purchase.id)}>
                   Aderir
@@ -241,6 +263,7 @@ const MarketplaceModule = ({ company, user, token }: MarketplaceModuleProps) => 
           </div>
         ))}
       </section>
+
 
     </div>
   );
