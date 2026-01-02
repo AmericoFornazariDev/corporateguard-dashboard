@@ -3,9 +3,15 @@ import { Company, User, TermsAcceptance } from '../types';
 import { acceptTerms, updateCompanyProfile } from '../services/mockBackend';
 import { TermsModal } from './TermsModal';
 import { OperationalDashboard } from './OperationalDashboard';
+codex/review-project-and-provide-feedback-4jf7zj
+import CollectivePurchasesModule from '../src/modules/collective-purchases/CollectivePurchasesModule';
+import MarketplaceModule from '../src/modules/marketplace/MarketplaceModule';
+import ReputationModule from '../src/modules/reputation/ReputationModule';
+
 import CollectivePurchasesModule from '../modules/collective-purchases/CollectivePurchasesModule';
 import MarketplaceModule from '../modules/marketplace/MarketplaceModule';
 import ReputationModule from '../modules/reputation/ReputationModule';
+ main
 import { Building2, FileCheck, ShieldCheck, ArrowRight, User as UserIcon, LogOut, Lock, Search, Edit3, MapPin, Phone, FileText, Camera, X, Loader2, Globe, Sparkles, Moon, Settings, HelpCircle, ChevronDown } from 'lucide-react';
 
 interface Props {
