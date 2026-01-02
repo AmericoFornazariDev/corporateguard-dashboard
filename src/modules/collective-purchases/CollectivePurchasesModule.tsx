@@ -114,6 +114,7 @@ const CollectivePurchasesModule = ({ company, user, token }: CollectivePurchases
   };
 
   return (
+
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-gray-900">Compras Coletivas</h1>
@@ -248,6 +249,116 @@ const CollectivePurchasesModule = ({ company, user, token }: CollectivePurchases
           <h2 className="text-lg font-semibold text-gray-900">Dados do documento final</h2>
           <p className="text-sm text-gray-600">Compra: {finalDocument.purchase.product_name}</p>
           <ul className="mt-3 space-y-1 text-sm text-gray-600">
+
+
+
+    <div>
+      <h2>Compras Coletivas</h2>
+      <p>Empresa: {company.nome_fantasia}</p>
+      <p>Utilizador: {user.name}</p>
+
+      <section>
+        <h3>Criar nova compra</h3>
+        <div>
+          <label>
+            Produto
+            <input value={productName} onChange={(event) => setProductName(event.target.value)} />
+          </label>
+        </div>
+        <div>
+          <label>
+            Descrição
+            <textarea value={description} onChange={(event) => setDescription(event.target.value)} />
+          </label>
+        </div>
+        <div>
+          <label>
+            Quantidade alvo
+            <input
+              type="number"
+              value={targetQuantity}
+              onChange={(event) => setTargetQuantity(event.target.value)}
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            Quantidade do criador
+            <input
+              type="number"
+              value={creatorQuantity}
+              onChange={(event) => setCreatorQuantity(event.target.value)}
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            Assinatura - ID
+            <input value={signatureId} onChange={(event) => setSignatureId(event.target.value)} />
+          </label>
+        </div>
+        <div>
+          <label>
+            Assinatura - Nome
+            <input value={signatureName} onChange={(event) => setSignatureName(event.target.value)} />
+          </label>
+        </div>
+        <div>
+          <label>
+            Assinatura - Contacto
+            <input value={signatureContact} onChange={(event) => setSignatureContact(event.target.value)} />
+          </label>
+        </div>
+        <button type="button" onClick={handleCreate}>
+          Criar compra
+        </button>
+      </section>
+
+      {error && <p>{error}</p>}
+      {loading ? <p>A carregar...</p> : null}
+
+      <section>
+        <h3>Minhas compras</h3>
+        {purchases.length === 0 ? <p>Sem compras registadas.</p> : null}
+        {purchases.map((purchase) => (
+          <div key={purchase.id} style={{ border: '1px solid #ddd', marginBottom: '1rem', padding: '0.75rem' }}>
+            <h4>{purchase.product_name}</h4>
+            <p>{purchase.description}</p>
+            <p>
+              Status: {purchase.status} | Confirmado: {purchase.total_confirmed ?? 0} / {purchase.target_quantity}
+            </p>
+            {purchase.status === 'CLOSED' ? (
+              <button type="button" onClick={() => handleFetchFinalDocument(purchase.id)}>
+                Ver dados para documento final
+              </button>
+            ) : (
+              <p>Edição bloqueada quando CLOSED.</p>
+            )}
+            <div>
+              <strong>Participantes</strong>
+              {purchase.participants && purchase.participants.length > 0 ? (
+                <ul>
+                  {purchase.participants.map((participant) => (
+                    <li key={participant.id}>
+                      {participant.nome_fantasia || participant.company_id} - {participant.quantity} ({participant.status})
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>Sem participantes ainda.</p>
+              )}
+            </div>
+          </div>
+        ))}
+      </section>
+
+      {finalDocument ? (
+        <section>
+          <h3>Dados do documento final</h3>
+          <p>Compra: {finalDocument.purchase.product_name}</p>
+          <ul>
+
+
             {finalDocument.participants.map((participant, index) => (
               <li key={`${participant.nif}-${index}`}>
                 {participant.nome_fantasia} - {participant.quantity} - {participant.nif} -{' '}
@@ -255,7 +366,15 @@ const CollectivePurchasesModule = ({ company, user, token }: CollectivePurchases
               </li>
             ))}
           </ul>
+
         </div>
+
+
+        </div>
+
+        </section>
+
+
       ) : null}
     </div>
   );
