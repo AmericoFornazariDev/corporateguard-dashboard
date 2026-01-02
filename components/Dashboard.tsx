@@ -3,6 +3,11 @@ import { Company, User, TermsAcceptance } from '../types';
 import { acceptTerms, updateCompanyProfile } from '../services/mockBackend';
 import { TermsModal } from './TermsModal';
 import { OperationalDashboard } from './OperationalDashboard';
+
+import CollectivePurchasesModule from '../src/modules/collective-purchases/CollectivePurchasesModule';
+import MarketplaceModule from '../src/modules/marketplace/MarketplaceModule';
+import ReputationModule from '../src/modules/reputation/ReputationModule';
+
 import { Building2, FileCheck, ShieldCheck, ArrowRight, User as UserIcon, LogOut, Lock, Search, Edit3, MapPin, Phone, FileText, Camera, X, Loader2, Globe, Sparkles, Moon, Settings, HelpCircle, ChevronDown } from 'lucide-react';
 
 interface Props {
@@ -15,7 +20,7 @@ interface Props {
 
 export const Dashboard: React.FC<Props> = ({ user, company, terms, onTermsAccepted, onLogout }) => {
   const [isSigning, setIsSigning] = useState(false);
-  const [showOperational, setShowOperational] = useState(false);
+  const [activeView, setActiveView] = useState<'INSTITUTIONAL' | 'OPERATIONAL_HOME' | 'COLLECTIVE_BUY' | 'MARKETPLACE' | 'REPUTATION'>('INSTITUTIONAL');
   
   // Profile Edit State
   const [isEditingProfile, setIsEditingProfile] = useState(false);
@@ -101,6 +106,40 @@ export const Dashboard: React.FC<Props> = ({ user, company, terms, onTermsAccept
             </div>
 
             <div className="h-6 w-px bg-gray-200 mx-2"></div>
+
+            {activeView !== 'INSTITUTIONAL' && (
+                <div className="hidden md:flex items-center gap-2">
+                    <button
+                        onClick={() => setActiveView(activeView === 'OPERATIONAL_HOME' ? 'INSTITUTIONAL' : 'OPERATIONAL_HOME')}
+                        className="text-xs font-semibold text-gray-600 border border-gray-200 px-3 py-1.5 rounded-full hover:bg-gray-50"
+                    >
+                        Voltar
+                    </button>
+					
+                    {activeView === 'OPERATIONAL_HOME' && (
+                        <div className="flex items-center gap-2">
+                            <button
+                                onClick={() => setActiveView('COLLECTIVE_BUY')}
+                                className="text-xs font-semibold text-gray-600 border border-gray-200 px-3 py-1.5 rounded-full hover:bg-gray-50"
+                            >
+                                Compras Coletivas
+                            </button>
+                            <button
+                                onClick={() => setActiveView('MARKETPLACE')}
+                                className="text-xs font-semibold text-gray-600 border border-gray-200 px-3 py-1.5 rounded-full hover:bg-gray-50"
+                            >
+                                Marketplace
+                            </button>
+                            <button
+                                onClick={() => setActiveView('REPUTATION')}
+                                className="text-xs font-semibold text-gray-600 border border-gray-200 px-3 py-1.5 rounded-full hover:bg-gray-50"
+                            >
+                                Reputação
+                            </button>
+                        </div>
+                    )}
+                </div>
+            )}
             
             {/* User Profile Dropdown Area */}
             <div className="relative">
@@ -466,7 +505,7 @@ export const Dashboard: React.FC<Props> = ({ user, company, terms, onTermsAccept
                 </div>
 
                 <button 
-                    onClick={() => setShowOperational(true)}
+                    onClick={() => setActiveView('OPERATIONAL_HOME')}
                     className="relative z-10 w-full bg-white text-gray-900 hover:bg-gray-100 py-3 rounded-xl font-bold transition-all shadow-lg flex items-center justify-center gap-2"
                 >
                     Entrar na Rede
@@ -490,10 +529,16 @@ export const Dashboard: React.FC<Props> = ({ user, company, terms, onTermsAccept
       
       {isEditingProfile && <EditProfileModal />}
 
-      {showOperational ? (
-        <OperationalDashboard company={localCompany} onBack={() => setShowOperational(false)} />
-      ) : (
-        <InstitutionalView />
+      {activeView === 'INSTITUTIONAL' && <InstitutionalView />}
+      {activeView === 'OPERATIONAL_HOME' && (
+        <OperationalDashboard company={localCompany} onBack={() => setActiveView('INSTITUTIONAL')} />
+      )}
+      {activeView !== 'INSTITUTIONAL' && activeView !== 'OPERATIONAL_HOME' && (
+        {
+          COLLECTIVE_BUY: <CollectivePurchasesModule company={localCompany} user={user} />,
+          MARKETPLACE: <MarketplaceModule company={localCompany} user={user} />,
+          REPUTATION: <ReputationModule company={localCompany} user={user} />
+        }[activeView]
       )}
     </div>
   );
