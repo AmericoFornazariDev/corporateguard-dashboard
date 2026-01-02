@@ -67,7 +67,7 @@ app.post('/api/auth/register', async (req, res) => {
         // Insert User
         const insertUserText = `
             INSERT INTO users (id, name, email, role, company_id) 
-            VALUES ($1, $2, $3, 'admin', $4) 
+            VALUES ($1, $2, $3, 'membro', $4) 
             RETURNING *`;
         const userRes = await client.query(insertUserText, [userId, name, email, companyId]);
 
