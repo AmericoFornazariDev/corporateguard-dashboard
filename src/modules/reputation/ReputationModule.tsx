@@ -45,6 +45,7 @@ const ReputationModule = ({ company, user, token }: ReputationModuleProps) => {
   }, [history]);
 
   return (
+
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-gray-900">Reputação e Histórico</h1>
@@ -67,11 +68,36 @@ const ReputationModule = ({ company, user, token }: ReputationModuleProps) => {
         <ul className="mt-3 space-y-2 text-sm text-gray-600">
           {history.map((entry) => (
             <li key={entry.id} className="bg-white border border-gray-200 rounded-lg p-3">
+
+    <div>
+      <h2>Reputação e Histórico</h2>
+      <p>Empresa: {company.nome_fantasia}</p>
+      <p>Utilizador: {user.name}</p>
+
+      {error && <p>{error}</p>}
+      {loading ? <p>A carregar...</p> : null}
+
+      <section>
+        <h3>Score atual</h3>
+        <p>{score}</p>
+      </section>
+
+      <section>
+        <h3>Histórico de participações</h3>
+        {history.length === 0 ? <p>Sem histórico.</p> : null}
+        <ul>
+          {history.map((entry) => (
+            <li key={entry.id}>
+
               {entry.product_name} - {entry.quantity} - {entry.participation_status} ({entry.participation_created_at})
             </li>
           ))}
         </ul>
+
       </div>
+
+      </section>
+
     </div>
   );
 };
